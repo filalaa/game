@@ -218,6 +218,26 @@ document.addEventListener('keyup', function(e) {
   keydown = false;
 });
 
+// listen to touch events for touch controls
+canvas.addEventListener('touchstart', function(e) {
+  const touchX = e.touches[0].clientX;
+  const canvasCenter = canvas.getBoundingClientRect().left + canvas.width / 2;
+
+  if (touchX < canvasCenter) {
+    keydown = true;
+    playerDir = -1;
+    doodle.dx = -3;
+  } else {
+    keydown = true;
+    playerDir = 1;
+    doodle.dx = 3;
+  }
+});
+
+canvas.addEventListener('touchend', function(e) {
+  keydown = false;
+});
+
 // start the game
 requestAnimationFrame(loop);
 </script>
