@@ -171,7 +171,7 @@ function loop() {
   // Рисуем изображение только если doodleImg действительно ссылается на HTMLImageElement
     context.drawImage(playerImg, doodle.x, doodle.y, doodle.width, doodle.height);
   } else {
-    console.error("playerImg не является HTMLImageElement:", doodleImg);
+    console.error("playerImg не является HTMLImageElement:", playerImg);
   }
 
   prevDoodleY = doodle.y;
