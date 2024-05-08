@@ -169,7 +169,18 @@ function loop() {
 
   if (playerImg instanceof HTMLImageElement) {
   // Рисуем изображение только если doodleImg действительно ссылается на HTMLImageElement
-    context.drawImage(playerImg, doodle.x-16, doodle.y-16, 80 * playerDir, 80);
+    //context.drawImage(playerImg, doodle.x-16, doodle.y-16, 80 * playerDir, 80);
+
+    if (playerDir < 0) {
+      // Отражаем изображение, если playerDir отрицателен
+      context.save();
+      context.scale(-1, 1); // Отражение по горизонтали
+      context.drawImage(playerImg, -doodle.x - 80, doodle.y, 80, 80);
+      context.restore();
+    } else {
+      context.drawImage(playerImg, doodle.x, doodle.y, doodle.width, doodle.height);
+    }
+    
   } else {
     console.error("playerImg не является HTMLImageElement:", playerImg);
   }
