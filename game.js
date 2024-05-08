@@ -165,7 +165,7 @@ function loop() {
   context.fillRect(doodle.x, doodle.y, doodle.width/2, doodle.height/2);
 
   // draw doodle
-  context.drawImage(doodleImg, doodle.x, doodle.y, doodle.width, doodle.height);
+  context.drawImage(playerImg, doodle.x, doodle.y, doodle.width, doodle.height);
 
   prevDoodleY = doodle.y;
 
