@@ -175,10 +175,10 @@ function loop() {
       // Отражаем изображение, если playerDir отрицателен
       context.save();
       context.scale(-1, 1); // Отражение по горизонтали
-      context.drawImage(playerImg, -doodle.x - 80, doodle.y, 80, 80);
+      context.drawImage(playerImg, -doodle.x - 80 - 16, doodle.y - 10, 80, 80);
       context.restore();
     } else {
-      context.drawImage(playerImg, doodle.x, doodle.y, 80, 80);
+      context.drawImage(playerImg, doodle.x - 16, doodle.y - 10, 80, 80);
     }
     
   } else {
