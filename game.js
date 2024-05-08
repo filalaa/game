@@ -1,7 +1,7 @@
 const canvas = document.getElementById('game');
 const context = canvas.getContext('2d');
 const playerImg = new Image();
-playerImg.src = 'data/gfx/player.png';
+playerImg.src = 'gfx/player.png';
 
 // width and height of each platform and where platforms start
 const platformWidth = 65;
