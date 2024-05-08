@@ -54,8 +54,8 @@ while (y > 0) {
 
 // the doodle jumper
 const doodle = {
-  width: 40,
-  height: 60,
+  width: 128,
+  height: 128,
   x: canvas.width / 2 - 20,
   y: canvas.height - 110,
 
