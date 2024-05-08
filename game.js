@@ -162,7 +162,7 @@ function loop() {
 
   // draw doodle
   context.fillStyle = 'yellow';
-  context.fillRect(doodle.x, doodle.y, doodle.width, doodle.height);
+  context.fillRect(doodle.x, doodle.y, doodle.width/2, doodle.height/2);
 
   // draw doodle
   context.drawImage(doodleImg, doodle.x, doodle.y, doodle.width, doodle.height);
