@@ -1,5 +1,7 @@
 const canvas = document.getElementById('game');
 const context = canvas.getContext('2d');
+const playerImg = new Image();
+playerImg.src = 'data/gfx/player.png';
 
 // width and height of each platform and where platforms start
 const platformWidth = 65;
@@ -162,6 +164,9 @@ function loop() {
   // draw doodle
   context.fillStyle = 'yellow';
   context.fillRect(doodle.x, doodle.y, doodle.width, doodle.height);
+
+  // draw doodle
+  context.drawImage(doodleImg, doodle.x, doodle.y, doodle.width, doodle.height);
 
   prevDoodleY = doodle.y;
 
