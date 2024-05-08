@@ -165,7 +165,14 @@ function loop() {
   context.fillRect(doodle.x, doodle.y, doodle.width/2, doodle.height/2);
 
   // draw doodle
-  context.drawImage(playerImg, doodle.x, doodle.y, doodle.width, doodle.height);
+  //context.drawImage(playerImg, doodle.x, doodle.y, doodle.width, doodle.height);
+
+  if (playerImg instanceof HTMLImageElement) {
+  // Рисуем изображение только если doodleImg действительно ссылается на HTMLImageElement
+    context.drawImage(playerImg, doodle.x, doodle.y, doodle.width, doodle.height);
+  } else {
+    console.error("playerImg не является HTMLImageElement:", doodleImg);
+  }
 
   prevDoodleY = doodle.y;
 
