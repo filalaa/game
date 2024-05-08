@@ -66,6 +66,7 @@ const doodle = {
 
 // keep track of player direction and actions
 let playerDir = 0;
+let playerDirAngle = 0;
 let keydown = false;
 let prevDoodleY = doodle.y;
 
@@ -167,11 +168,15 @@ function loop() {
   // draw doodle
   //context.drawImage(playerImg, doodle.x, doodle.y, doodle.width, doodle.height);
 
+  if (playerDir != 0){
+    playerDirAngle = playerDir;
+  }
+  
   if (playerImg instanceof HTMLImageElement) {
   // Рисуем изображение только если doodleImg действительно ссылается на HTMLImageElement
     //context.drawImage(playerImg, doodle.x-16, doodle.y-16, 80 * playerDir, 80);
 
-    if (playerDir > 0) {
+    if (playerDirAngle > 0) {
       // Отражаем изображение, если playerDir отрицателен
       context.save();
       context.scale(-1, 1); // Отражение по горизонтали
