@@ -169,7 +169,7 @@ function loop() {
 
   if (playerImg instanceof HTMLImageElement) {
   // Рисуем изображение только если doodleImg действительно ссылается на HTMLImageElement
-    context.drawImage(playerImg, doodle.x-16, doodle.y-16, 80, 80);
+    context.drawImage(playerImg, doodle.x-16, doodle.y-16, 80 * playerDir, 80);
   } else {
     console.error("playerImg не является HTMLImageElement:", playerImg);
   }
