@@ -54,8 +54,8 @@ while (y > 0) {
 
 // the doodle jumper
 const doodle = {
-  width: 128,
-  height: 128,
+  width: 40,
+  height: 60,
   x: canvas.width / 2 - 20,
   y: canvas.height - 110,
 
@@ -169,7 +169,7 @@ function loop() {
 
   if (playerImg instanceof HTMLImageElement) {
   // Рисуем изображение только если doodleImg действительно ссылается на HTMLImageElement
-    context.drawImage(playerImg, doodle.x, doodle.y, doodle.width, doodle.height);
+    context.drawImage(playerImg, doodle.x, doodle.y, 128, 128);
   } else {
     console.error("playerImg не является HTMLImageElement:", playerImg);
   }
