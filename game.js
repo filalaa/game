@@ -162,8 +162,8 @@ function loop() {
   });
 
   // draw doodle
-  //context.fillStyle = 'yellow';
-  //context.fillRect(doodle.x, doodle.y, doodle.width, doodle.height);
+  context.fillStyle = 'yellow';
+  context.fillRect(doodle.x, doodle.y, doodle.width, doodle.height);
 
   // draw doodle
   context.drawImage(doodleImg, doodle.x, doodle.y, doodle.width, doodle.height);
