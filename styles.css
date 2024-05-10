@@ -1,0 +1,15 @@
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Запретить прокрутку страницы */
+  -webkit-touch-callout: none; /* Запрещаем контекстное меню iOS */
+  -webkit-user-select: none; /* Запрещаем выделение текста (iOS) */
+  -moz-user-select: none; /* Запрещаем выделение текста (Firefox) */
+  -ms-user-select: none; /* Запрещаем выделение текста (Edge) */
+  user-select: none; /* Запрещаем выделение текста (стандарт) */
+}
+
+canvas {
+  display: block; /* Принудительно делаем канвас блочным элементом */
+  background-color: #000; /* Цвет фона */
+}
