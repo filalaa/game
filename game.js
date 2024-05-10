@@ -113,7 +113,7 @@ function loop() {
     //start()
 
     doodle.y = canvas.height - doodle.height;
-    doodle.dy = bounceVelocity;
+    doodle.dy = bounceVelocity * 5;
   }
 
 
