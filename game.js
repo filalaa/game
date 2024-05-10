@@ -9,6 +9,8 @@ const gravity = 0.33;
 const drag = 0.3;
 const bounceVelocity = -12.5;
 
+let score = 0;
+
 let minPlatformSpace = 20;
 let maxPlatformSpace = 25;
 
@@ -22,6 +24,7 @@ function random(min, max) {
 }
 
 function start(){
+  score = 0;
   doodle.y = canvas.height - 110;
   doodle.x = canvas.width / 2 - platformWidth / 2;
   doodle.dy = 0;
@@ -138,7 +141,11 @@ function loop() {
   context.fillStyle = 'yellow';
   context.fillRect(doodle.x, doodle.y, doodle.width, doodle.height);
 
-  drawScore(doodle.y);
+  if(score < doodle.y){
+    score = doodle.y;
+  }
+  
+  drawScore(score);
 
   if (playerDir != 0){
     playerDirAngle = playerDir;
