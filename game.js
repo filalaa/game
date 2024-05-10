@@ -38,6 +38,9 @@ function start(){
      y: canvas.height - 50
   }];
 
+  minPlatformSpace = 15;
+  maxPlatformSpace = 20;
+
   // Генерируем новые платформы сверху после перезапуска игры.
   let y = platforms[0].y;
   while (y > 0) {
@@ -52,9 +55,6 @@ function start(){
     );
     platforms.push({ x, y });
   }
-
-  minPlatformSpace = 15;
-  maxPlatformSpace = 20;
 }
 
 const doodle = {
