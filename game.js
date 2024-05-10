@@ -97,9 +97,9 @@ function loop() {
       platforms.push({ x, y });
     }
 
-  minPlatformSpace = 15;
-  maxPlatformSpace = 20;
-}
+    minPlatformSpace = 15;
+    maxPlatformSpace = 20;
+  }
 
 
   if (!keydown) {
