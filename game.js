@@ -76,6 +76,7 @@ function loop() {
 
   if (doodle.y > canvas.height) {
     doodle.y = canvas.height - 110;
+    doodle.x = canvas.width / 2 - platformWidth / 2;
     doodle.dy = 0;
     platforms = [{
       x: canvas.width / 2 - platformWidth / 2,
