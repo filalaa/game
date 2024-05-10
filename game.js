@@ -5,7 +5,19 @@ const gravity = 0.33;
 const moveSpeed = 3;
 let velocity = 0;
 const bounceVelocity = -12.5;
-let platforms = [];
+
+// Ширина и высота каждой платформы и начальные координаты платформ.
+const platformWidth = 65;
+const platformHeight = 20;
+// Минимальное и максимальное вертикальное расстояние между каждой платформой.
+let minPlatformSpace = 15;
+let maxPlatformSpace = 20;
+
+// Информация о каждой платформе. Первая платформа начинается внизу посередине экрана.
+let platforms = [{
+  x: canvas.width / 2 - platformWidth / 2,
+  y: canvas.height - 50
+}];
 
 function random(min, max) {
   return Math.random() * (max - min) + min;
