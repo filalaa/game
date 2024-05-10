@@ -1,45 +1,40 @@
 const canvas = document.getElementById('game');
-const context = canvas.getContext('2d');
-const playerImg = document.getElementById('playerImg');
+// Получаем элемент canvas по его идентификатору 'game'.
 
-// width and height of each platform and where platforms start
+const context = canvas.getContext('2d');
+// Получаем контекст отрисовки для элемента canvas.
+
+const playerImg = document.getElementById('playerImg');
+// Получаем изображение игрока по его идентификатору 'playerImg'.
+
+// Ширина и высота каждой платформы и начальные координаты платформ.
 const platformWidth = 65;
 const platformHeight = 20;
 
-// player physics
+// Физика игрока.
 const gravity = 0.33;
 const drag = 0.3;
 const bounceVelocity = -12.5;
 
-// minimum and maximum vertical space between each platform
+// Минимальное и максимальное вертикальное расстояние между каждой платформой.
 let minPlatformSpace = 15;
 let maxPlatformSpace = 20;
 
-// information about each platform. the first platform starts in the
-// bottom middle of the screen
+// Информация о каждой платформе. Первая платформа начинается внизу посередине экрана.
 let platforms = [{
   x: canvas.width / 2 - platformWidth / 2,
   y: canvas.height - 50
 }];
 
-// get a random number between the min (inclusive) and max (exclusive)
+// Получить случайное число между минимальным (включительно) и максимальным (исключительно).
 function random(min, max) {
   return Math.random() * (max - min) + min;
 }
 
-// fill the initial screen with platforms
+// Заполнить начальный экран платформами.
 let y = canvas.height - 50;
 while (y > 0) {
-  // the next platform can be placed above the previous one with a space
-  // somewhere between the min and max space
   y -= platformHeight + random(minPlatformSpace, maxPlatformSpace);
-
-  // a platform can be placed anywhere 25px from the left edge of the canvas
-  // and 25px from the right edge of the canvas (taking into account platform
-  // width).
-  // however the first few platforms cannot be placed in the center so
-  // that the player will bounce up and down without going up the screen
-  // until they are ready to move
   let x;
   do {
     x = random(25, canvas.width - 25 - platformWidth);
@@ -48,55 +43,49 @@ while (y > 0) {
     x > canvas.width / 2 - platformWidth * 1.5 &&
     x < canvas.width / 2 + platformWidth / 2
   );
-
   platforms.push({ x, y });
 }
 
-// the doodle jumper
+// Игрок.
 const doodle = {
   width: 40,
   height: 60,
   x: canvas.width / 2 - 20,
   y: canvas.height - 110,
 
-  // velocity
+  // Скорость.
   dx: 0,
   dy: 0
 };
 
-// keep track of player direction and actions
+// Отслеживаем направление и действия игрока.
 let playerDir = 0;
 let playerDirAngle = 0;
 let keydown = false;
 let prevDoodleY = doodle.y;
 
-// game loop
+// Игровой цикл.
 function loop() {
   requestAnimationFrame(loop);
   context.clearRect(0,0,canvas.width,canvas.height);
 
-  // apply gravity to doodle
+  // Применяем гравитацию к игроку.
   doodle.dy += gravity;
 
-  // if doodle reaches the middle of the screen, move the platforms down
-  // instead of doodle up to make it look like doodle is going up
+  // Если игрок достигает середины экрана, двигаем платформы вниз, чтобы создать иллюзию подъема.
   if (doodle.y < canvas.height / 2 && doodle.dy < 0) {
     platforms.forEach(function(platform) {
       platform.y += -doodle.dy;
     });
 
-    // add more platforms to the top of the screen as doodle moves up
+    // Добавляем больше платформ сверху экрана по мере подъема игрока.
     while (platforms[platforms.length - 1].y > 0) {
       platforms.push({
         x: random(25, canvas.width - 25 - platformWidth),
         y: platforms[platforms.length - 1].y - (platformHeight + random(minPlatformSpace, maxPlatformSpace))
       })
-
-      // add a bit to the min/max platform space as the player goes up
       minPlatformSpace += 0.5;
       maxPlatformSpace += 0.5;
-
-      // cap max space
       maxPlatformSpace = Math.min(maxPlatformSpace, canvas.height / 2);
     }
   }
@@ -104,12 +93,10 @@ function loop() {
     doodle.y += doodle.dy;
   }
 
-  // only apply drag to horizontal movement if key is not pressed
+  // Применяем сопротивление горизонтальному движению только если клавиша не нажата.
   if (!keydown) {
     if (playerDir < 0) {
       doodle.dx += drag;
-
-      // don't let dx go above 0
       if (doodle.dx > 0) {
         doodle.dx = 0;
         playerDir = 0;
@@ -117,7 +104,6 @@ function loop() {
     }
     else if (playerDir > 0) {
       doodle.dx -= drag;
-
       if (doodle.dx < 0) {
         doodle.dx = 0;
         playerDir = 0;
@@ -127,7 +113,6 @@ function loop() {
 
   doodle.x += doodle.dx;
 
-  // make doodle wrap the screen
   if (doodle.x + doodle.width < 0) {
     doodle.x = canvas.width;
   }
@@ -135,51 +120,35 @@ function loop() {
     doodle.x = -doodle.width;
   }
 
-  // draw platforms
+  // Рисуем платформы.
   context.fillStyle = 'green';
   platforms.forEach(function(platform) {
     context.fillRect(platform.x, platform.y, platformWidth, platformHeight);
-
-    // make doodle jump if it collides with a platform from above
     if (
-      // doodle is falling
       doodle.dy > 0 &&
-
-      // doodle was previous above the platform
       prevDoodleY + doodle.height <= platform.y &&
-
-      // doodle collides with platform
-      // (Axis Aligned Bounding Box [AABB] collision check)
       doodle.x < platform.x + platformWidth &&
       doodle.x + doodle.width > platform.x &&
       doodle.y < platform.y + platformHeight &&
       doodle.y + doodle.height > platform.y
     ) {
-      // reset doodle position so it's on top of the platform
       doodle.y = platform.y - doodle.height;
       doodle.dy = bounceVelocity;
     }
   });
 
-  // draw doodle
+  // Рисуем игрока.
   context.fillStyle = 'yellow';
   context.fillRect(doodle.x, doodle.y, doodle.width, doodle.height);
-
-  // draw doodle
-  //context.drawImage(playerImg, doodle.x, doodle.y, doodle.width, doodle.height);
 
   if (playerDir != 0){
     playerDirAngle = playerDir;
   }
   
   if (playerImg instanceof HTMLImageElement) {
-  // Рисуем изображение только если doodleImg действительно ссылается на HTMLImageElement
-    //context.drawImage(playerImg, doodle.x-16, doodle.y-16, 80 * playerDir, 80);
-
     if (playerDirAngle > 0) {
-      // Отражаем изображение, если playerDir отрицателен
       context.save();
-      context.scale(-1, 1); // Отражение по горизонтали
+      context.scale(-1, 1);
       context.drawImage(playerImg, -doodle.x - 80 + 16, doodle.y - 10, 80, 80);
       context.restore();
     } else {
@@ -192,22 +161,20 @@ function loop() {
 
   prevDoodleY = doodle.y;
 
-  // remove any platforms that have gone offscreen
+  // Удаляем платформы, вышедшие за пределы экрана.
   platforms = platforms.filter(function(platform) {
     return platform.y < canvas.height;
   })
 }
 
-// listen to keyboard events to move doodle
+// Слушаем события клавиатуры для управления игроком.
 document.addEventListener('keydown', function(e) {
-  // left arrow key
   if (e.which === 37) {
     keydown = true;
     playerDir = -1;
     doodle.dx = -3;
 
   }
-  // right arrow key
   else if (e.which === 39) {
     keydown = true;
     playerDir = 1;
@@ -219,7 +186,7 @@ document.addEventListener('keyup', function(e) {
   keydown = false;
 });
 
-// listen to touch events for touch controls
+// Слушаем события касания для управления игроком на мобильных устройствах.
 canvas.addEventListener('touchstart', function(e) {
   const touchX = e.touches[0].clientX;
   const canvasCenter = canvas.getBoundingClientRect().left + canvas.width / 2;
@@ -239,17 +206,17 @@ canvas.addEventListener('touchend', function(e) {
   keydown = false;
 });
 
-// set canvas dimensions based on device screen size
+// Устанавливаем размеры canvas на основе размера экрана устройства.
 function resizeCanvas() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 }
 
-// resize canvas when window is resized
+// Изменяем размер canvas при изменении размера окна.
 window.addEventListener('resize', resizeCanvas);
 
-// resize canvas initially
+// Изначально устанавливаем размер canvas.
 resizeCanvas();
 
-// start the game
+// Запускаем игру.
 requestAnimationFrame(loop);
