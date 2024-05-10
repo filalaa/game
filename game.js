@@ -141,8 +141,8 @@ function loop() {
   context.fillStyle = 'yellow';
   context.fillRect(doodle.x, doodle.y, doodle.width, doodle.height);
 
-  if(score < doodle.y){
-    score = doodle.y;
+  if(score < canvas.height - doodle.y){
+    score = canvas.height - doodle.y;
   }
   
   drawScore(score);
