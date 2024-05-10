@@ -23,7 +23,7 @@ function loop() {
   requestAnimationFrame(loop);
   context.clearRect(0, 0, canvas.width, canvas.height);
   player.dy += gravity;
-  player.dx *= (1 - drag);
+  //player.dx *= (1 - drag);
   player.x += player.dx;
   player.y += player.dy;
 
