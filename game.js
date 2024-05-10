@@ -110,10 +110,10 @@ function loop() {
   }
 
   if (doodle.y > canvas.height) {
-    //start()
+    start()
 
-    doodle.y = canvas.height - doodle.height;
-    doodle.dy = bounceVelocity;
+    //doodle.y = canvas.height - doodle.height;
+    //doodle.dy = bounceVelocity;
   }
 
 
