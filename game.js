@@ -9,7 +9,9 @@ const gravity = 0.33;
 const drag = 0.3;
 const bounceVelocity = -12.5;
 
-let score = 0;
+let score = 0; // Переменная для отслеживания расстояния прыжка.
+let jumpStartPosition = doodle.y; // Стартовая позиция игрока для подсчёта прыжка.
+
 
 let minPlatformSpace = 20;
 let maxPlatformSpace = 25;
@@ -25,6 +27,8 @@ function random(min, max) {
 
 function start(){
   score = 0;
+  jumpStartPosition = doodle.y;
+  
   doodle.y = canvas.height - 110;
   doodle.x = canvas.width / 2 - platformWidth / 2;
   doodle.dy = 0;
@@ -141,9 +145,7 @@ function loop() {
   context.fillStyle = 'yellow';
   context.fillRect(doodle.x, doodle.y, doodle.width, doodle.height);
 
-  if(score < canvas.height - doodle.y){
-    score = canvas.height - doodle.y;
-  }
+  score = jumpStartPosition - doodle.y;
   
   drawScore(score);
 
