@@ -138,6 +138,8 @@ function loop() {
   context.fillStyle = 'yellow';
   context.fillRect(doodle.x, doodle.y, doodle.width, doodle.height);
 
+  drawScore(doodle.y);
+
   if (playerDir != 0){
     playerDirAngle = playerDir;
   }
@@ -203,6 +205,13 @@ canvas.addEventListener('touchend', function(e) {
 function resizeCanvas() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
+}
+
+function drawScore(score) {
+  context.fillStyle = 'black';
+  context.font = '24px Arial';
+  context.textAlign = 'center';
+  context.fillText('Score: ' + score, canvas.width / 2, 30);
 }
 
 window.addEventListener('resize', resizeCanvas);
