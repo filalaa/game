@@ -3,9 +3,9 @@ const context = canvas.getContext('2d');
 const player = { x: canvas.width / 2, y: canvas.height / 2, width: 40, height: 60, dx: 0, dy: 0 };
 const gravity = 0.33;
 const moveSpeed = 3;
-const velocity = 0;
+let velocity = 0;
 const bounceVelocity = -12.5;
-const platforms = [];
+let platforms = [];
 
 function random(min, max) {
   return Math.random() * (max - min) + min;
