@@ -2,7 +2,8 @@ const canvas = document.getElementById('game');
 const context = canvas.getContext('2d');
 const player = { x: canvas.width / 2, y: canvas.height / 2, width: 40, height: 60, dx: 0, dy: 0 };
 const gravity = 0.33;
-const drag = 0.3;
+const moveSpeed = 3;
+const velocity = 0;
 const bounceVelocity = -12.5;
 const platforms = [];
 
@@ -23,7 +24,7 @@ function loop() {
   requestAnimationFrame(loop);
   context.clearRect(0, 0, canvas.width, canvas.height);
   player.dy += gravity;
-  //player.dx *= (1 - drag);
+  player.dx = velocity * moveSpeed;
   player.x += player.dx;
   player.y += player.dy;
 
@@ -39,12 +40,14 @@ function loop() {
 }
 
 document.addEventListener('keydown', function(e) {
-  if (e.which === 37) player.dx = -3;
-  else if (e.which === 39) player.dx = 3;
+  if (e.which === 37) 
+    velocity = -1;
+  else if (e.which === 39) 
+    velocity = 1;
 });
 
 document.addEventListener('keyup', function(e) {
-  if (e.which === 37 || e.which === 39) player.dx = 0;
+    velocity = 0;
 });
 
 function resizeCanvas() {
