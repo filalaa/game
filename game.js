@@ -50,7 +50,6 @@ document.addEventListener('keyup', function(e) {
     velocity = 0;
 });
 
-/ listen to touch events for touch controls
 canvas.addEventListener('touchstart', function(e) {
   const touchX = e.touches[0].clientX;
   const canvasCenter = canvas.getBoundingClientRect().left + canvas.width / 2;
