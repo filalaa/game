@@ -14,8 +14,8 @@ let score = 0; // Переменная для отслеживания расс�
 let jumpStartPosition = 0; // Стартовая позиция игрока для подсчёта прыжка.
 
 
-let minPlatformSpace = 20;
-let maxPlatformSpace = 25;
+let minPlatformSpace = 50;
+let maxPlatformSpace = 60;
 
 let platforms = [{
   x: canvas.width / 2 - platformWidth / 2,
@@ -38,8 +38,8 @@ function start(){
      y: canvas.height - 50
   }];
 
-  minPlatformSpace = 15;
-  maxPlatformSpace = 20;
+  minPlatformSpace = 50;
+  maxPlatformSpace = 60;
 
   // Генерируем новые платформы сверху после перезапуска игры.
   let y = platforms[0].y;
