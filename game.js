@@ -24,8 +24,8 @@ function loop() {
   requestAnimationFrame(loop);
   context.clearRect(0, 0, canvas.width, canvas.height);
   player.dy += gravity;
-  player.dx = velocity * moveSpeed;
-  player.x += player.dx;
+  //player.dx = velocity * moveSpeed;
+  player.x += velocity * moveSpeed;
   player.y += player.dy;
 
   platforms.forEach(function(platform) {
