@@ -81,9 +81,26 @@ function loop() {
       x: canvas.width / 2 - platformWidth / 2,
       y: canvas.height - 50
     }];
-    minPlatformSpace = 15;
-    maxPlatformSpace = 20;
-  }
+
+    // Генерируем новые платформы сверху после перезапуска игры.
+    let y = platforms[0].y;
+    while (y > 0) {
+      y -= platformHeight + random(minPlatformSpace, maxPlatformSpace);
+      let x;
+      do {
+        x = random(25, canvas.width - 25 - platformWidth);
+      } while (
+        y > canvas.height / 2 &&
+        x > canvas.width / 2 - platformWidth * 1.5 &&
+        x < canvas.width / 2 + platformWidth / 2
+      );
+      platforms.push({ x, y });
+    }
+
+  minPlatformSpace = 15;
+  maxPlatformSpace = 20;
+}
+
 
   if (!keydown) {
     if (playerDir < 0) {
