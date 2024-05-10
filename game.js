@@ -21,18 +21,32 @@ function random(min, max) {
   return Math.random() * (max - min) + min;
 }
 
-let y = canvas.height - 50;
-while (y > 0) {
-  y -= platformHeight + random(minPlatformSpace, maxPlatformSpace);
-  let x;
-  do {
-    x = random(25, canvas.width - 25 - platformWidth);
-  } while (
-    y > canvas.height / 2 &&
-    x > canvas.width / 2 - platformWidth * 1.5 &&
-    x < canvas.width / 2 + platformWidth / 2
-  );
-  platforms.push({ x, y });
+function start(){
+  doodle.y = canvas.height - 110;
+  doodle.x = canvas.width / 2 - platformWidth / 2;
+  doodle.dy = 0;
+  platforms = [{
+     x: canvas.width / 2 - platformWidth / 2,
+     y: canvas.height - 50
+  }];
+
+  // Генерируем новые платформы сверху после перезапуска игры.
+  let y = platforms[0].y;
+  while (y > 0) {
+    y -= platformHeight + random(minPlatformSpace, maxPlatformSpace);
+    let x;
+    do {
+      x = random(25, canvas.width - 25 - platformWidth);
+    } while (
+       y > canvas.height / 2 &&
+       x > canvas.width / 2 - platformWidth * 1.5 &&
+       x < canvas.width / 2 + platformWidth / 2
+    );
+    platforms.push({ x, y });
+  }
+
+  minPlatformSpace = 15;
+  maxPlatformSpace = 20;
 }
 
 const doodle = {
@@ -75,31 +89,7 @@ function loop() {
   }
 
   if (doodle.y > canvas.height) {
-    doodle.y = canvas.height - 110;
-    doodle.x = canvas.width / 2 - platformWidth / 2;
-    doodle.dy = 0;
-    platforms = [{
-      x: canvas.width / 2 - platformWidth / 2,
-      y: canvas.height - 50
-    }];
-
-    // Генерируем новые платформы сверху после перезапуска игры.
-    let y = platforms[0].y;
-    while (y > 0) {
-      y -= platformHeight + random(minPlatformSpace, maxPlatformSpace);
-      let x;
-      do {
-        x = random(25, canvas.width - 25 - platformWidth);
-      } while (
-        y > canvas.height / 2 &&
-        x > canvas.width / 2 - platformWidth * 1.5 &&
-        x < canvas.width / 2 + platformWidth / 2
-      );
-      platforms.push({ x, y });
-    }
-
-    minPlatformSpace = 15;
-    maxPlatformSpace = 20;
+    start()
   }
 
 
@@ -218,5 +208,5 @@ function resizeCanvas() {
 window.addEventListener('resize', resizeCanvas);
 
 resizeCanvas();
-
+start()
 requestAnimationFrame(loop);
