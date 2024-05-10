@@ -32,7 +32,7 @@ function start(){
   
   doodle.y = canvas.height - 110;
   doodle.x = canvas.width / 2 - platformWidth / 2;
-  doodle.dy = 0;
+  doodle.dy = 200;//0
   platforms = [{
      x: canvas.width / 2 - platformWidth / 2,
      y: canvas.height - 50
@@ -113,7 +113,7 @@ function loop() {
     //start()
 
     doodle.y = canvas.height - doodle.height;
-    doodle.dy = bounceVelocity * 5;
+    doodle.dy = bounceVelocity;
   }
 
 
