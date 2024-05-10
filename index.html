@@ -15,10 +15,16 @@
       align-items: center;
       justify-content: center;
       overflow: hidden; /* Запрещаем прокрутку страницы */
+      -webkit-touch-callout: none; /* Запрещаем контекстное меню iOS */
+      -webkit-user-select: none; /* Запрещаем выделение текста (iOS) */
+      -moz-user-select: none; /* Запрещаем выделение текста (Firefox) */
+      -ms-user-select: none; /* Запрещаем выделение текста (Edge) */
+      user-select: none; /* Запрещаем выделение текста (стандарт) */
     }
 
     canvas {
-      border: 1px solid black;
+      display: block; /* Принудительно делаем канвас блочным элементом */
+      background-color: #000; /* Цвет фона */
       width: 100%;
       height: 100%;
       user-select: none; /* Предотвращаем выделение текста на canvas */
