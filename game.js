@@ -9,8 +9,8 @@ const gravity = 0.33;
 const drag = 0.3;
 const bounceVelocity = -12.5;
 
-let minPlatformSpace = 15;
-let maxPlatformSpace = 20;
+let minPlatformSpace = 20;
+let maxPlatformSpace = 25;
 
 let platforms = [{
   x: canvas.width / 2 - platformWidth / 2,
