@@ -9,6 +9,7 @@ const gravity = 0.33;
 const drag = 0.3;
 const bounceVelocity = -12.5;
 
+let bestScore = 0;
 let score = 0; // Переменная для отслеживания расстояния прыжка.
 let jumpStartPosition = 0; // Стартовая позиция игрока для подсчёта прыжка.
 
@@ -148,7 +149,7 @@ function loop() {
 
  
   
-  drawScore(score);
+  drawScore(-score);
 
   if (playerDir != 0){
     playerDirAngle = playerDir;
@@ -221,7 +222,14 @@ function drawScore(score) {
   context.fillStyle = 'black';
   context.font = '24px Arial';
   context.textAlign = 'center';
-  context.fillText('Score: ' + Math.floor(score/1000) * -1, canvas.width / 2, 30);
+
+  if(bestScore < score){
+    bestScore = score;
+  }
+
+    
+  context.fillText('Best: ' + Math.floor(bestScore/1000), canvas.width / 2, 30);
+  context.fillText('Score: ' + Math.floor(score/1000), canvas.width / 2 + 30, 30);
 }
 
 window.addEventListener('resize', resizeCanvas);
