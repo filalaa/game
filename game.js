@@ -44,7 +44,7 @@ document.addEventListener('keydown', function(e) {
 });
 
 document.addEventListener('keyup', function(e) {
-  player.dx = 0;
+  if (e.which === 37 || e.which === 39) player.dx = 0;
 });
 
 function resizeCanvas() {
