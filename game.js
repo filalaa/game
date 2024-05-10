@@ -91,6 +91,18 @@ function loop() {
       minPlatformSpace += 0.5;
       maxPlatformSpace += 0.5;
       maxPlatformSpace = Math.min(maxPlatformSpace, canvas.height / 2);
+
+      if ( maxPlatformSpace >= 200) //208-213 
+      {
+        maxPlatformSpace = 200;
+      }
+
+      if ( minPlatformSpace >= 200) //208-213 
+      {
+        minPlatformSpace = 200;
+      }
+      
+      
     }
   }
   else {
