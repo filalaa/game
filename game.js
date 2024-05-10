@@ -6,8 +6,8 @@ const platformWidth = 65;
 const platformHeight = 20;
 
 const gravity = 0.33;
-const drag = 0.3;
-const bounceVelocity = -12.5;
+const drag = 0.5;//0.3
+const bounceVelocity = -14;//12.5
 
 let bestScore = 0;
 let score = 0; // Переменная для отслеживания расстояния прыжка.
