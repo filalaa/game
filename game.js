@@ -245,8 +245,6 @@ function drawScore(score) {
     
   context.fillText('Best: ' + Math.floor(bestScore/1000), canvas.width / 2, 30);
   context.fillText('Score: ' + Math.floor(score/1000), canvas.width / 2, 60);
-
-   context.fillText('MinMax: ' + minPlatformSpace + '|' + maxPlatformSpace, canvas.width / 2, 100);
   
 }
 
