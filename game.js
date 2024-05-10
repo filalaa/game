@@ -221,7 +221,7 @@ function drawScore(score) {
   context.fillStyle = 'black';
   context.font = '24px Arial';
   context.textAlign = 'center';
-  context.fillText('Score: ' + Math.floor(score/1000), canvas.width / 2, 30);
+  context.fillText('Score: ' + Math.floor(score/1000) * -1, canvas.width / 2, 30);
 }
 
 window.addEventListener('resize', resizeCanvas);
