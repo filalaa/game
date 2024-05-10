@@ -12,12 +12,20 @@ function random(min, max) {
 }
 
 function generatePlatforms() {
-  let y = canvas.height - 50;
-  while (y > 0) {
-    y -= 35 + random(5, 20);
-    const x = random(25, canvas.width - 90);
-    platforms.push({ x, y });
-  }
+// Заполнить начальный экран платформами.
+let y = canvas.height - 50;
+while (y > 0) {
+  y -= platformHeight + random(minPlatformSpace, maxPlatformSpace);
+  let x;
+  do {
+    x = random(25, canvas.width - 25 - platformWidth);
+  } while (
+    y > canvas.height / 2 &&
+    x > canvas.width / 2 - platformWidth * 1.5 &&
+    x < canvas.width / 2 + platformWidth / 2
+  );
+  platforms.push({ x, y });
+}
 }
 
 function loop() {
