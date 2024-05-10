@@ -79,6 +79,7 @@ function loop() {
   if (doodle.y < canvas.height / 2 && doodle.dy < 0) {
     platforms.forEach(function(platform) {
       platform.y += -doodle.dy;
+      score += doodle.dy;
     });
 
     while (platforms[platforms.length - 1].y > 0) {
@@ -145,7 +146,7 @@ function loop() {
   context.fillStyle = 'yellow';
   context.fillRect(doodle.x, doodle.y, doodle.width, doodle.height);
 
-  score = jumpStartPosition - doodle.y;
+ 
   
   drawScore(score);
 
