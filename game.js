@@ -10,7 +10,7 @@ const drag = 0.3;
 const bounceVelocity = -12.5;
 
 let score = 0; // Переменная для отслеживания расстояния прыжка.
-let jumpStartPosition = doodle.y; // Стартовая позиция игрока для подсчёта прыжка.
+let jumpStartPosition = 0; // Стартовая позиция игрока для подсчёта прыжка.
 
 
 let minPlatformSpace = 20;
